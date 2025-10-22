@@ -1,0 +1,46 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workload Balancer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Workload Balancer</h1>
+        <p>Upload an Excel file with 'task' and 'workload' columns, specify the number of people, and let the Genetic Algorithm balance the workload.</p>
+
+        <form id="uploadForm" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="excelFile">Upload Excel File:</label>
+                <input type="file" id="excelFile" name="file" accept=".xlsx, .xls" required>
+            </div>
+            <div class="form-group">
+                <label for="numPeople">Number of People (N):</label>
+                <input type="number" id="numPeople" name="num_people" value="3" min="1" required>
+            </div>
+            <button type="submit" id="submitBtn">Calculate Workload</button>
+        </form>
+
+        <div id="loading" class="hidden">
+            <div class="spinner"></div>
+            <p>Calculating workload... This might take a moment.</p>
+        </div>
+
+        <div id="results" class="hidden">
+            <h2>Results</h2>
+            <p id="resultMessage"></p>
+            <p>Final Variance: <strong id="finalVariance"></strong></p>
+            <a id="downloadLink" class="button" href="#" download="workload_distribution.xlsx">Download Results Excel</a>
+        </div>
+
+        <div id="error" class="hidden">
+            <h2>Error</h2>
+            <p id="errorMessage"></p>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
